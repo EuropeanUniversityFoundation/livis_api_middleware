@@ -1,0 +1,5 @@
+name: livis_api_middleware
+type: module
+description: Middleware for the LIVIS API
+package: LIVIS
+core_version_requirement: ^9 || ^10

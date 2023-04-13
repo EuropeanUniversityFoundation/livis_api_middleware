@@ -1,0 +1,9 @@
+{
+  "name": "euf/livis_api_middleware",
+  "type": "drupal-module",
+  "description": "LIVIS API middleware",
+  "keywords": [
+  ],
+  "homepage": "https://github.com/EuropeanUniversityFoundation/livis_api_middleware",
+  "minimum-stability": "dev"
+}

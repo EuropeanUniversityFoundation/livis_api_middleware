@@ -1,0 +1,4 @@
+services:
+  livis_api_middleware.authentication_manager:
+    class: Drupal\livis_api_middleware\LivisApiMiddlewareAuthenticationManager
+    arguments: ['@tempstore.shared', '@settings']
