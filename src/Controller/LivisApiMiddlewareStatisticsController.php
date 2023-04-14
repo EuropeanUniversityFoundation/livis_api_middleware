@@ -69,13 +69,6 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
   private $secondAttemptLeft = TRUE;
 
   /**
-   * Error details.
-   *
-   * @var array
-   */
-  private $error;
-
-  /**
    * Constructor.
    */
   public function __construct(
@@ -123,16 +116,22 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
 
     $response = $this->sendApiRequest($request);
 
-    if ($this->error) {
-      if ($this->error['status_code'] == 401 && $this->secondAttemptLeft) {
-        $this->secondAttemptLeft = FALSE;
-        $this->tempStore->delete('token');
-        $this->handleRequest($request);
-      }
-      return new JsonResponse($this->error, $this->error['status_code']);
+    $status_code = $response->getStatusCode();
+
+    if ($status_code == 401 && $this->secondAttemptLeft) {
+      $this->secondAttemptLeft = FALSE;
+      $this->tempStore->set('expired', TRUE);
+      $this->tempStore->delete('token');
+      $response = $this->handleRequest($request);
+    }
+    else if ($status_code == 200 || $status_code == 201) {
+      $response = new JsonResponse(json_decode($response->getBody()), $status_code);
+    }
+    else {
+      $response = new JsonResponse(json_decode($response->getBody()->getContents()), $status_code);
     }
 
-    return new JsonResponse(json_decode($response->getBody()->getContents()));
+    return $response;
   }
 
   /**
@@ -165,27 +164,11 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
       $response = $this->client->request('GET', $path, $options);
     }
     catch (ClientException | ServerException $e) {
-      $this->setError($e);
+
       return $e->getResponse();
     }
 
     return $response;
-  }
-
-  /**
-   * Gets error from exception response.
-   *
-   * @param \GuzzleHttp\ClientException|\GuzzleHttp\ServerException $exception
-   *   Incoming exception.
-   */
-  protected function setError($exception) {
-    $message = $exception->getMessage();
-    $status_code = $exception->getResponse()->getStatusCode();
-
-    $this->error = [
-      'message' => $message,
-      'status_code' => $status_code,
-    ];
   }
 
 }

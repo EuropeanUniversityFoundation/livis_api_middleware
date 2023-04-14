@@ -123,16 +123,22 @@ class LivisApiMiddlewareSubmissionController extends ControllerBase {
 
     $response = $this->sendApiRequest($request);
 
-    if ($this->error) {
-      if ($this->error['status_code'] == 401 && $this->secondAttemptLeft) {
-        $this->secondAttemptLeft = FALSE;
-        $this->tempStore->delete('token');
-        $this->handleRequest($request);
-      }
-      return new JsonResponse($this->error, $this->error['status_code']);
+    $status_code = $response->getStatusCode();
+
+    if ($status_code == 401 && $this->secondAttemptLeft) {
+      $this->secondAttemptLeft = FALSE;
+      $this->tempStore->set('expired', TRUE);
+      $this->tempStore->delete('token');
+      $response = $this->handleRequest($request);
+    }
+    else if ($status_code == 200 || $status_code == 201) {
+      $response = new JsonResponse(json_decode($response->getBody()), $status_code);
+    }
+    else {
+      $response = new JsonResponse(json_decode($response->getBody()->getContents()), $status_code);
     }
 
-    return new JsonResponse(json_decode($response->getBody()->getContents()));
+    return $response;
   }
 
   /**

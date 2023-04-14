@@ -74,7 +74,7 @@ class LivisApiMiddlewareAuthenticationManager {
     $this->tempStore = $this->tempStoreFactory->get('livis_api_middleware');
 
     // Sets token data saved in tempStore.
-    $this->token = $this->tempStore->get('token');
+    // $this->token = $this->tempStore->get('token');
   }
 
   /**
@@ -86,11 +86,10 @@ class LivisApiMiddlewareAuthenticationManager {
   public function getToken($force_renew = FALSE): array {
     if ($this->tokenSaved() && !$force_renew) {
       return [
-        'token' => $this->token,
+        'token' => $this->tempStore->get('token'),
       ];
     }
 
-    // echo ('Old token:' . $this->token);
     $options = [
       'json' => $this->credentials,
     ];
@@ -107,6 +106,7 @@ class LivisApiMiddlewareAuthenticationManager {
     $body = json_decode($response->getBody()->getContents());
 
     $this->tempStore->set('token', $body->token);
+    $this->tempStore->set('expired', FALSE);
     $this->token = $body->token;
 
     return [
@@ -121,7 +121,7 @@ class LivisApiMiddlewareAuthenticationManager {
    *   Returns if saved token should be used.
    */
   protected function tokenSaved(): bool {
-    $is_saved = !is_null($this->tempStore->get('token'));
+    $is_saved = !is_null($this->tempStore->get('token')) && !$this->tempStore->get('expired');
 
     return $is_saved;
   }
