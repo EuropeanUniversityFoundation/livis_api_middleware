@@ -114,11 +114,11 @@ class LivisApiMiddlewareSubmissionController extends ControllerBase {
   public function handleRequest(Request $request): JsonResponse {
     $response = $this->authManager->getToken(!$this->secondAttemptLeft);
 
-    if (!isset($auth_response['token'])) {
+    if (!isset($response['token'])) {
       return new JsonResponse($response, $response['status_code']);
     }
     else {
-      $this->token = $auth_response['token'];
+      $this->token = $response['token'];
     }
 
     $response = $this->sendApiPostRequest($request);
