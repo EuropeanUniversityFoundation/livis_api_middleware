@@ -114,14 +114,14 @@ class LivisApiMiddlewareSubmissionController extends ControllerBase {
   public function handleRequest(Request $request): JsonResponse {
     $response = $this->authManager->getToken(!$this->secondAttemptLeft);
 
-    if (!isset($response['token'])) {
+    if (!isset($auth_response['token'])) {
       return new JsonResponse($response, $response['status_code']);
     }
     else {
-      $this->token = $response['token'];
+      $this->token = $auth_response['token'];
     }
 
-    $response = $this->sendApiRequest($request);
+    $response = $this->sendApiPostRequest($request);
 
     $status_code = $response->getStatusCode();
 
@@ -147,10 +147,10 @@ class LivisApiMiddlewareSubmissionController extends ControllerBase {
    * @param Symfony\Component\HttpFoundation\Request $request
    *   The original Symfony request.
    *
-   * @return array
+   * @return GuzzleHttp\Psr7\Response
    *   The body of the JSON response as an array.
    */
-  protected function sendApiRequest(Request $request): Response {
+  protected function sendApiPostRequest(Request $request): Response {
     $body = json_decode($request->getContent());
 
     $options = [

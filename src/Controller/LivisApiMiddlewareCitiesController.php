@@ -147,8 +147,8 @@ class LivisApiMiddlewareCitiesController extends ControllerBase {
    * @param Symfony\Component\HttpFoundation\Request $request
    *   The original Symfony request.
    *
-   * @return array
-   *   The body of the JSON response as an array.
+   * @return GuzzleHttp\Psr7\Response
+   *   The API response.
    */
   protected function sendApiGetRequest(Request $request): Response {
     $query = $request->query->all();
@@ -178,6 +178,13 @@ class LivisApiMiddlewareCitiesController extends ControllerBase {
     return $response;
   }
 
+  /**
+   * Creates and sends a POST request to LIVIS API cities endpoint.
+   *
+   * @param Symfony\Component\HttpFoundation\Request $request
+   *
+   * @return GuzzleHttp\Psr7\Response
+   */
   protected function sendApiPostRequest(Request $request): Response {
     $body = json_decode($request->getContent());
 

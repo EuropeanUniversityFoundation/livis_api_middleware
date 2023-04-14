@@ -114,7 +114,7 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
       $this->token = $response['token'];
     }
 
-    $response = $this->sendApiRequest($request);
+    $response = $this->sendApiGetRequest($request);
 
     $status_code = $response->getStatusCode();
 
@@ -140,10 +140,10 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
    * @param Symfony\Component\HttpFoundation\Request $request
    *   The original Symfony request.
    *
-   * @return array
-   *   The body of the JSON response as an array.
+   * @return GuzzleHttp\Psr7\Response
+   *   The API response.
    */
-  protected function sendApiRequest(Request $request): Response {
+  protected function sendApiGetRequest(Request $request): Response {
     $query = $request->query->all();
 
     // Converting numeric parameters to integer.
