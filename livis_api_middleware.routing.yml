@@ -1,5 +1,5 @@
 livis_api_middleware.statistics:
-  path: '/livis/statistics'
+  path: '/livis/living_cost_statistics/{id}'
   defaults:
     _title: 'Living cost statistics for one city'
     _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareStatisticsController::handleRequest'
@@ -7,6 +7,9 @@ livis_api_middleware.statistics:
     _permission: 'use livis_api_middleware'
   methods: ['GET']
   options:
+    parameters:
+      id:
+        type: Integer
     _auth: ['key_auth', 'cookie']
 livis_api_middleware.cities:
   path: '/livis/cities'
@@ -19,7 +22,7 @@ livis_api_middleware.cities:
   options:
     _auth: ['key_auth', 'cookie']
 livis_api_middleware.submission:
-  path: '/livis/submission'
+  path: '/livis/living_cost_submissions'
   defaults:
     _title: 'Living cost submission for a city'
     _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareSubmissionController::handleRequest'

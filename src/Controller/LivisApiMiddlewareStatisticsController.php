@@ -104,7 +104,7 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    *   The response.
    */
-  public function handleRequest(Request $request): JsonResponse {
+  public function handleRequest(Request $request, int $id): JsonResponse {
     $response = $this->authManager->getToken(!$this->secondAttemptLeft);
 
     if (!isset($response['token'])) {
@@ -114,7 +114,7 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
       $this->token = $response['token'];
     }
 
-    $response = $this->sendApiGetRequest($request);
+    $response = $this->sendApiGetRequest($request, $id);
 
     $status_code = $response->getStatusCode();
 
@@ -122,7 +122,7 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
       $this->secondAttemptLeft = FALSE;
       $this->tempStore->set('expired', TRUE);
       $this->tempStore->delete('token');
-      $response = $this->handleRequest($request);
+      $response = $this->handleRequest($request, $id);
     }
     else if ($status_code == 200 || $status_code == 201) {
       $response = new JsonResponse(json_decode($response->getBody()), $status_code);
@@ -143,23 +143,15 @@ class LivisApiMiddlewareStatisticsController extends ControllerBase {
    * @return GuzzleHttp\Psr7\Response
    *   The API response.
    */
-  protected function sendApiGetRequest(Request $request): Response {
-    $query = $request->query->all();
-
-    // Converting numeric parameters to integer.
-    foreach ($query as $name => $value) {
-      if (is_numeric($value)) {
-        $query[$name] = intval($value);
-      }
-    }
+  protected function sendApiGetRequest(Request $request, int $id): Response {
 
     $options = [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->token,
       ],
-      'query' => $query,
     ];
     $path = $this->settings->get('livis_api')['statistics']['path'];
+    $path = $path . '/' . $id;
     try {
       $response = $this->client->request('GET', $path, $options);
     }
