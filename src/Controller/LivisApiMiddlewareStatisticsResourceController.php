@@ -4,12 +4,11 @@ namespace Drupal\livis_api_middleware\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Drupal\livis_api_middleware\Controller\AbstractLivisApiMiddlewareController;
 
 /**
- * Middleware for the LIVIS API.
+ * Middleware for the Livis API.
  */
-class LivisApiMiddlewareCitiesController extends AbstractLivisApiMiddlewareController {
+class LivisApiMiddlewareStatisticsResourceController extends AbstractLivisApiMiddlewareController {
 
   /**
    * Handle incoming request for inventory endpoint.
@@ -23,7 +22,9 @@ class LivisApiMiddlewareCitiesController extends AbstractLivisApiMiddlewareContr
    *   The response.
    */
   public function handleRequest(Request $request, $path = NULL): JsonResponse {
-    $path = $this->settings->get('livis_api')['cities']['path'];
+    $idRouteParam = $request->attributes->get('_raw_variables')->get('id');
+    $path = $this->settings->get('livis_api')['statistics']['path'] . '/' . $idRouteParam;
+
     $response = parent::handleRequest($request, $path);
 
     return $response;

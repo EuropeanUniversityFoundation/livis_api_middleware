@@ -2,7 +2,7 @@ livis_api_middleware.statistics_resource:
   path: '/livis/living_cost_statistics/{id}'
   defaults:
     _title: 'Living cost statistics resource for a city'
-    _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareStatisticsController::handleGetRequest'
+    _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareStatisticsResourceController::handleRequest'
   requirements:
     _permission: 'use livis_api_middleware'
   methods: ['GET']
@@ -15,7 +15,7 @@ livis_api_middleware.statistics_collection:
   path: '/livis/living_cost_statistics'
   defaults:
     _title: 'Living cost statistics collection filtered by City name'
-    _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareStatisticsController::handleGetCollectionRequest'
+    _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewareStatisticsCollectionController::handleRequest'
   requirements:
     _permission: 'use livis_api_middleware'
   methods: ['GET']

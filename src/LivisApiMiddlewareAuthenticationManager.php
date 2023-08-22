@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\ServerException;
 use Drupal\Core\TempStore\SharedTempStoreFactory;
 
 /**
- * Service for managing HOME API authentication.
+ * Service for managing LIVIS API authentication.
  */
 class LivisApiMiddlewareAuthenticationManager {
 
@@ -72,9 +72,6 @@ class LivisApiMiddlewareAuthenticationManager {
     // Creates or retrieves SharedTempStore.
     $this->tempStoreFactory = $temp_store_factory;
     $this->tempStore = $this->tempStoreFactory->get('livis_api_middleware');
-
-    // Sets token data saved in tempStore.
-    // $this->token = $this->tempStore->get('token');
   }
 
   /**
