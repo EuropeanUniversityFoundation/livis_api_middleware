@@ -9,21 +9,21 @@ use Drupal\livis_api_middleware\Controller\AbstractLivisApiMiddlewareController;
 /**
  * Middleware for the LIVIS API.
  */
-class LivisApiMiddlewareCitiesController extends AbstractLivisApiMiddlewareController {
+class LivisApiMiddlewarePageContentController extends AbstractLivisApiMiddlewareController {
 
   /**
    * Handle incoming request for inventory endpoint.
    *
-   * @param \Symfony\Component\HttpFoundation\Request $request
+   * @param Symfony\Component\HttpFoundation\Request $request
    *   Original request.
    * @param string $path
-   *   Subpath to send request to.
+   *   Subpath to call in LIVIS API.
    *
-   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   * @return Symfony\Component\HttpFoundation\JsonResponse
    *   The response.
    */
   public function handleRequest(Request $request, $path = NULL): JsonResponse {
-    $path = $this->settings->get('livis_api')['cities']['path'];
+    $path = $this->settings->get('livis_api')['page_content']['path'];
 
     $response = parent::handleRequest($request, $path);
 

@@ -41,4 +41,14 @@ livis_api_middleware.submission:
   methods: ['POST']
   options:
     _auth: ['key_auth', 'cookie']
+livis_api_middleware.page_content:
+  path: '/livis/page_content'
+  defaults:
+    _title: 'Page content'
+    _controller: '\Drupal\livis_api_middleware\Controller\LivisApiMiddlewarePageContentController::handleRequest'
+  requirements:
+    _permission: 'use livis_api_middleware'
+  methods: ['GET']
+  options:
+    _auth: ['key_auth', 'cookie']
 
