@@ -1,4 +1,4 @@
-name: livis_api_middleware
+name: LIVIS API middleware
 type: module
 description: Middleware for the LIVIS API
 package: LIVIS
