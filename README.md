@@ -54,6 +54,7 @@ The module adds endpoints to the site, that use the credentials, urls and paths 
   - Parameters: None
   - Example usage (POST): `{site_url}/livis/living_cost_submissions` with a JSON body:
   ```
+
         {
           "monthlyAccommodationCost": 500,
           "monthlyLivingCost": 500,
@@ -62,6 +63,7 @@ The module adds endpoints to the site, that use the credentials, urls and paths 
           "stayDurationInMonths": 4,
           "termsAccepted": "On"
         }
+
   ```
     - userId: is the id of the user in the external system
     - city: the IRI of the city from the response in the cities endpoint.
