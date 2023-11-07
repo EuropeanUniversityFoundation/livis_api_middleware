@@ -27,43 +27,51 @@ Put the LIVIS API endpoint URLs and credentials into your `local.settings.php`. 
 The module adds endpoints to the site, that use the credentials, urls and paths to first login to the LIVIS API, store the JWT token in temporary storage and then call the LIVIS API's corresponding endpoint using the retrieved token to fetch data.
 
 ### Filterable statistics collection
-  - Path: `/livis/living_cost_statistics`
-  - Method: `GET`
-  - Optional parameters (query): `city`, `city.name`
-  - Examples of use:
-    - `{site_url}/livis/statistics?city=/cities/1` where `/cities/1` is the IRI from the response in the cities endpoint.
-    - `{site_url}/livis/statistics?city.name=Brussels` where `city.name` is the name of the city.
+- Path: `/livis/living_cost_statistics`
+- Method: `GET`
+- Optional parameters (query): `city`, `city.name`
+#### Examples of use
+- `{site_url}/livis/statistics?city=/cities/1` where `/cities/1` is the IRI from the response in the cities endpoint.
+- `{site_url}/livis/statistics?city.name=Brussels` where `city.name` is the name of the city.
 
 ### Statistics resource
   - Path: `/livis/living_cost_statistics/{id}`
   - Method: `GET`
   - Path parameter: `id`
-  - Example usage:
-    - `{site_url}/livis/living_cost_statistics/1` (where `{id} = 1`). Response contains the living cost statistics with the `id`: 1.
+#### Example usage
+- `{site_url}/livis/living_cost_statistics/1` (where `{id} = 1`). Response contains the living cost statistics with the `id`: 1.
 
 ### Cities endpoint
   - Path: `/livis/cities`
   - Method: `GET` and `POST`
   - Parameters (query): `name` (optional)
-#### Example usage (GET):
-  `{site_url}/livis/cities?name=City name`
-#### Example usage (POST):
-  `{site_url}/livis/cities` with a JSON body `{"name":"City name", "country":"Country name"}`. This creates a city in the LIVIS API with the posted data.
+#### Example usage (GET)
+  - `{site_url}/livis/cities?name=City name`
+#### Example usage (POST)
+- `{site_url}/livis/cities` with a JSON body
+```json
+{
+  "name":"City name",
+  "country":"Country name"
+}
+```
+This creates a city in the LIVIS API with the posted data.
 
 ### Living cost submissions endpoint
   - Path: `/livis/living_cost_submissions`
   - Method: `POST`
   - Parameters: None
-#### Example usage (POST): `{site_url}/livis/living_cost_submissions` with a JSON body:
+#### Example usage (POST)
+-`{site_url}/livis/living_cost_submissions` with a JSON body:
 ```json
-        {
-          "monthlyAccommodationCost": 500,
-          "monthlyLivingCost": 500,
-          "userId": 2,
-          "city": "/cities/2",
-          "stayDurationInMonths": 4,
-          "termsAccepted": "On"
-        }
+{
+  "monthlyAccommodationCost": 500,
+  "monthlyLivingCost": 500,
+  "userId": 2,
+  "city": "/cities/2",
+  "stayDurationInMonths": 4,
+  "termsAccepted": "On"
+}
 ```
 - userId: is the id of the user in the external system.
 - city: the IRI of the city from the response in the cities endpoint.
