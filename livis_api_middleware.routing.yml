@@ -10,7 +10,7 @@ livis_api_middleware.statistics_resource:
     parameters:
       id:
         type: Integer
-    _auth: ['key_auth', 'cookie']
+    _auth: ['key_auth', 'cookie'] # 'key_auth' will be removed before release
 livis_api_middleware.statistics_collection:
   path: '/livis/living_cost_statistics'
   defaults:
@@ -20,7 +20,7 @@ livis_api_middleware.statistics_collection:
     _permission: 'use livis_api_middleware'
   methods: ['GET']
   options:
-    _auth: ['key_auth', 'cookie']
+    _auth: ['key_auth', 'cookie'] # 'key_auth' will be removed before release
 livis_api_middleware.cities:
   path: '/livis/cities'
   defaults:
@@ -30,7 +30,7 @@ livis_api_middleware.cities:
     _permission: 'use livis_api_middleware'
   methods: ['GET', 'POST']
   options:
-    _auth: ['key_auth', 'cookie']
+    _auth: ['key_auth', 'cookie'] # 'key_auth' will be removed before release
 livis_api_middleware.submission:
   path: '/livis/living_cost_submissions'
   defaults:
@@ -40,7 +40,7 @@ livis_api_middleware.submission:
     _permission: 'use livis_api_middleware'
   methods: ['POST']
   options:
-    _auth: ['key_auth', 'cookie']
+    _auth: ['key_auth', 'cookie'] # 'key_auth' will be removed before release
 livis_api_middleware.page_content:
   path: '/livis/page_content'
   defaults:
@@ -50,5 +50,5 @@ livis_api_middleware.page_content:
     _permission: 'use livis_api_middleware'
   methods: ['GET']
   options:
-    _auth: ['key_auth', 'cookie']
+    _auth: ['key_auth', 'cookie'] # 'key_auth' will be removed before release
 

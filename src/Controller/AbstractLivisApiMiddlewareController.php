@@ -3,16 +3,16 @@
 namespace Drupal\livis_api_middleware\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
+use Drupal\livis_api_middleware\LivisApiMiddlewareAuthenticationManager;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
-use Symfony\Component\HttpFoundation\Request;
-use Drupal\Core\TempStore\SharedTempStoreFactory;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use GuzzleHttp\Psr7\Response;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\livis_api_middleware\LivisApiMiddlewareAuthenticationManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class reused by all controllers.
@@ -103,8 +103,8 @@ abstract class AbstractLivisApiMiddlewareController extends ControllerBase {
    * @param string $path
    *   Subpath to call.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   Response from the LIVIS API.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   Response from the LIVIS API as JsonResponse.
    */
   public function handleRequest(Request $request, string $path): JsonResponse {
     $tokenResponse = $this->authManager->getToken(!$this->secondAttemptLeft);
@@ -137,12 +137,12 @@ abstract class AbstractLivisApiMiddlewareController extends ControllerBase {
   /**
    * Forwards GET or POST request.
    *
-   * @param Symfony\Component\HttpFoundation\Request $request
+   * @param \Symfony\Component\HttpFoundation\Request $request
    *   The original request.
    * @param string $path
    *   Subpath to call.
    *
-   * @return Symfony\Component\HttpFoundation\Response
+   * @return \GuzzleHttp\Psr7\Response
    *   Response from the LIVIS API.
    */
   public function forwardRequest(Request $request, string $path): Response {
@@ -196,7 +196,13 @@ abstract class AbstractLivisApiMiddlewareController extends ControllerBase {
   }
 
   /**
-   * Checks if response is 401 and refreshes token if yes.
+   * Checks if response is 401 and refreshes token if there's an attempt left.
+   *
+   * @param \GuzzleHttp\Psr7\Response $response
+   *   Response from the LIVIS API.
+   *
+   * @return bool
+   *   Returns if token needs to be reset.
    */
   public function tokenNeedsResetting(Response $response) {
     return $response->getStatusCode() == 401 && $this->secondAttemptLeft;

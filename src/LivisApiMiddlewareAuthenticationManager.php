@@ -2,11 +2,11 @@
 
 namespace Drupal\livis_api_middleware;
 
-use GuzzleHttp\Client;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
-use Drupal\Core\TempStore\SharedTempStoreFactory;
 
 /**
  * Service for managing LIVIS API authentication.

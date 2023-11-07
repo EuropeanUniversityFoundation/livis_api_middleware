@@ -1,4 +1,3 @@
 use livis_api_middleware:
   title: 'Access LIVIS API middleware endpoints'
   description: 'Permission to access the LIVIS API middleware endpoints'
-  restrict access: true

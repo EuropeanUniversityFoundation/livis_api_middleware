@@ -2,9 +2,9 @@
 
 namespace Drupal\livis_api_middleware\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\livis_api_middleware\Controller\AbstractLivisApiMiddlewareController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Middleware for the LIVIS API.
@@ -14,7 +14,7 @@ class LivisApiMiddlewarePageContentController extends AbstractLivisApiMiddleware
   /**
    * Handle incoming request for inventory endpoint.
    *
-   * @param Symfony\Component\HttpFoundation\Request $request
+   * @param \Symfony\Component\HttpFoundation\Request $request
    *   Original request.
    * @param string $path
    *   Subpath to call in LIVIS API.

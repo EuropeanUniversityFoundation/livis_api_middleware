@@ -2,8 +2,8 @@
 
 namespace Drupal\livis_api_middleware\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Middleware for the Livis API.
