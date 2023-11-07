@@ -61,7 +61,7 @@ The module adds endpoints to the site, that use the credentials, urls and paths 
   "city": "/cities/2",
   "stayDurationInMonths": 4,
   "termsAccepted": "On"
-}
+  }
   ```
     - userId: is the id of the user in the external system
     - city: the IRI of the city from the response in the cities endpoint.
