@@ -63,9 +63,9 @@ The module adds endpoints to the site, that use the credentials, urls and paths 
           "termsAccepted": "On"
         }
   ```
-    - userId: is the id of the user in the external system
-    - city: the IRI of the city from the response in the cities endpoint.
-    - termsAccepted: If the value is not `"On"`, the submission is rejected.
+    userId: is the id of the user in the external system
+    city: the IRI of the city from the response in the cities endpoint.
+    termsAccepted: If the value is not `"On"`, the submission is rejected.
 
 ## Permissions and Authentication
 The module provides the `use livis_api_middleware` permission, assign it to ALL AUTHENTICATED users. The client has to take care of authenticating the Drupal users. Currently  `cookie` authentication is enabled for the endpoint (in the routing file).
