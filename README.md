@@ -45,14 +45,16 @@ The module adds endpoints to the site, that use the credentials, urls and paths 
   - Path: `/livis/cities`
   - Method: `GET` and `POST`
   - Parameters (query): `name` (optional)
-  - Example usage (GET): `{site_url}/livis/cities?name=City name`
-  - Example usage (POST): `{site_url}/livis/cities` with a JSON body `{"name":"City name", "country":"Country name"}`. This creates a city in the LIVIS API with the posted data.
+#### Example usage (GET):
+  `{site_url}/livis/cities?name=City name`
+#### Example usage (POST):
+  `{site_url}/livis/cities` with a JSON body `{"name":"City name", "country":"Country name"}`. This creates a city in the LIVIS API with the posted data.
 
 ### Living cost submissions endpoint
   - Path: `/livis/living_cost_submissions`
   - Method: `POST`
   - Parameters: None
-  - Example usage (POST): `{site_url}/livis/living_cost_submissions` with a JSON body:
+#### Example usage (POST): `{site_url}/livis/living_cost_submissions` with a JSON body:
   ```json
         {
           "monthlyAccommodationCost": 500,
