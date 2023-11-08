@@ -17,22 +17,22 @@ In order to install this module:
       ],
       ...
     }
-    ```
+```
 
 Once installed, enable the module in Drupal on the admin ui or if you have Drush, type `drush en livis_api_middleware`
 
 ## Setting up the module
 
 Put the LIVIS API endpoint URLs and credentials into your `local.settings.php`. By default you can find the settings file at `web/sites/default/local.settings.php`. Paste the following keys and values to the end of that file:
-  - `$settings['livis_api']['login']['base_uri']`: The base URL of the authentication endpoint. Example: `https://login.livis.eu`
-  - `$settings['livis_api']['login']['path']`: The subpath of the athentication endpoint. Example: `/login`. This means, the full path of the authentication endpoint will be: `https://login.livis.eu/login`
-  - `$settings['livis_api']['credentials']['username']`: The username to log in with on the authentication endpoint.
-  - `$settings['livis_api']['credentials']['password']`: The password to use with the username on the authentication endpoint.
-  - `$settings['livis_api']['base_uri']`: The base URL of the LIVIS inventory API endpoint. Example: `https://inventory.livis.eu`
-  - `$settings['livis_api']['statistics']['path']`: The subpath of the LIVIS living cost statistics API endpoint. Example: `/living_cost_statistics`. This means, the full path of the statistics endpoint will be: `https://api.livis.eu/statistics`
-  - `$settings['livis_api']['cities']['path']`: The subpath of the LIVIS API cities endpoint. Example: `/cities`
-  - `$settings['livis_api']['submission']['path']`: The subpath of the LIVIS API submissions endpoint. Example: `/submissions`
-  - `$settings['livis_api']['page_content']['path']`: The middleware provides the content of two pages as an endpoint. Example: `pages`
+- `$settings['livis_api']['login']['base_uri']`: The base URL of the authentication endpoint. Example: `https://login.livis.eu`
+- `$settings['livis_api']['login']['path']`: The subpath of the athentication endpoint. Example: `/login`. This means, the full path of the authentication endpoint will be: `https://login.livis.eu/login`
+- `$settings['livis_api']['credentials']['username']`: The username to log in with on the authentication endpoint.
+- `$settings['livis_api']['credentials']['password']`: The password to use with the username on the authentication endpoint.
+- `$settings['livis_api']['base_uri']`: The base URL of the LIVIS inventory API endpoint. Example: `https://inventory.livis.eu`
+- `$settings['livis_api']['statistics']['path']`: The subpath of the LIVIS living cost statistics API endpoint. Example: `/living_cost_statistics`. This means, the full path of the statistics endpoint will be: `https://api.livis.eu/statistics`
+- `$settings['livis_api']['cities']['path']`: The subpath of the LIVIS API cities endpoint. Example: `/cities`
+- `$settings['livis_api']['submission']['path']`: The subpath of the LIVIS API submissions endpoint. Example: `/submissions`
+- `$settings['livis_api']['page_content']['path']`: The middleware provides the content of two pages as an endpoint. Example: `pages`
 
 ## Endpoints
 The module adds endpoints to the site, that use the credentials, urls and paths to first login to the LIVIS API, store the JWT token in temporary storage and then call the LIVIS API's corresponding endpoint using the retrieved token to fetch data.
