@@ -6,7 +6,18 @@ This project contains a module for Drupal 9+, that acts as a middleware for acce
 
 In order to install this module:
   - download the files and add them in your site's `web/modules/custom/livis_api_middleware` directory
-  - or add the vcs to your composer json and install it via composer `composer require euf/livis_api_middleware`
+  - or add the following vcs to your composer json and install it via composer `composer require euf/livis_api_middleware`
+```
+    {
+      ...
+      "repositories": [
+        ...
+
+        {"type": "vcs", "url": "https://github.com/EuropeanUniversityFoundation/livis_api_middleware/"},
+      ],
+      ...
+    }
+    ```
 
 Once installed, enable the module in Drupal on the admin ui or if you have Drush, type `drush en livis_api_middleware`
 
